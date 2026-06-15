@@ -17,7 +17,7 @@ type Plan = {
 const PLANS: Plan[] = [
   {
     id: '1mo', label: '1 Month', price: '₹79', perMonth: '₹79 / mo',
-    paymentLink: 'https://rzp.io/rzp/6E6mlZf',
+    paymentLink: 'https://rzp.io/rzp/6E6mIZf',
   },
   {
     id: '3mo', label: '3 Months', price: '₹222', perMonth: '₹74 / mo',
