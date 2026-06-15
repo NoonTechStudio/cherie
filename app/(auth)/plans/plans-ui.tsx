@@ -54,10 +54,6 @@ export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIPr
     subtitle = `${expiresInDays} day${expiresInDays === 1 ? '' : 's'} left on subscription`
   }
 
-  function handleSubscribe() {
-    window.open(plan.paymentLink, '_blank', 'noopener,noreferrer')
-  }
-
   const canExit = (subscriptionStatus === 'trial' || subscriptionStatus === 'active') && typeof expiresInDays === 'number' && expiresInDays > 0
 
   return (
@@ -111,11 +107,15 @@ export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIPr
             </div>
           ))}
         </div>
-        <button onClick={handleSubscribe}
-          className="w-full flex items-center justify-center gap-2 bg-[#6B0F1A] text-white rounded-2xl py-4 text-[17px] font-bold shadow-sm active:scale-[0.98] transition-transform">
+        <a
+          href={plan.paymentLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 bg-[#6B0F1A] text-white rounded-2xl py-4 text-[17px] font-bold shadow-sm active:scale-[0.98] transition-transform"
+        >
           <Zap className="w-4 h-4" />
           {`Subscribe · ${plan.price}`}
-        </button>
+        </a>
         <p className="text-center text-[12px] text-[#8E8E93] mt-3">Secure · Powered by Razorpay · Cancel anytime</p>
       </main>
   )
