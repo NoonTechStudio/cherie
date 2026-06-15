@@ -1,27 +1,34 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Script from 'next/script'
 import Image from 'next/image'
-import { toast } from 'sonner'
 import { Check, Zap, X } from 'lucide-react'
 
 type Plan = {
   id: '1mo' | '3mo' | '6mo'
   label: string
-  months: number
   price: string
-  amountPaise: number
   perMonth: string
   badge?: string
   popular?: boolean
+  paymentLink: string
 }
 
 const PLANS: Plan[] = [
-  { id: '1mo', label: '1 Month', months: 1, price: '₹79', amountPaise: 7900, perMonth: '₹79 / mo' },
-  { id: '3mo', label: '3 Months', months: 3, price: '₹222', amountPaise: 22200, perMonth: '₹74 / mo', badge: '20% off', popular: true },
-  { id: '6mo', label: '6 Months', months: 6, price: '₹444', amountPaise: 44400, perMonth: '₹74 / mo', badge: '20% off' },
+  {
+    id: '1mo', label: '1 Month', price: '₹79', perMonth: '₹79 / mo',
+    paymentLink: 'https://rzp.io/rzp/6E6mlZf',
+  },
+  {
+    id: '3mo', label: '3 Months', price: '₹222', perMonth: '₹74 / mo',
+    badge: '20% off', popular: true,
+    paymentLink: 'https://rzp.io/rzp/3rp9O1UB',
+  },
+  {
+    id: '6mo', label: '6 Months', price: '₹444', perMonth: '₹74 / mo',
+    badge: '20% off',
+    paymentLink: 'https://rzp.io/rzp/ZmLODfx',
+  },
 ]
 
 const FEATURES = [
@@ -31,21 +38,13 @@ const FEATURES = [
   'Business profile page',
 ]
 
-type RazorpayOptions = {
-  key: string; amount: number; currency: string; name: string
-  description?: string; order_id: string; handler: () => void
-  theme?: { color?: string }; modal?: { ondismiss?: () => void }
-}
-
 interface PlansUIProps {
   subscriptionStatus?: string | null
   expiresInDays?: number | null
 }
 
 export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIProps) {
-  const router = useRouter()
   const [selected, setSelected] = useState<Plan['id']>('3mo')
-  const [loading, setLoading] = useState(false)
   const plan = PLANS.find((p) => p.id === selected)!
 
   let subtitle = 'Your free trial has ended'
@@ -55,44 +54,17 @@ export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIPr
     subtitle = `${expiresInDays} day${expiresInDays === 1 ? '' : 's'} left on subscription`
   }
 
-  async function handleSubscribe() {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/payment/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: selected }),
-      })
-      if (!res.ok) throw new Error('Failed to create order')
-      const { order_id, razorpay_key } = await res.json()
-      const options: RazorpayOptions = {
-        key: razorpay_key,
-        amount: plan.amountPaise,
-        currency: 'INR',
-        name: 'Chérie',
-        description: `${plan.label} subscription`,
-        order_id,
-        handler: () => router.push('/dashboard'),
-        theme: { color: '#6B0F1A' },
-        modal: { ondismiss: () => setLoading(false) },
-      }
-      const rzp = new window.Razorpay(options)
-      rzp.open()
-    } catch {
-      toast.error('Payment failed. Please try again.')
-      setLoading(false)
-    }
+  function handleSubscribe() {
+    window.location.href = plan.paymentLink
   }
 
   const canExit = (subscriptionStatus === 'trial' || subscriptionStatus === 'active') && typeof expiresInDays === 'number' && expiresInDays > 0
 
   return (
-    <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
-      <main className="min-h-screen bg-white flex flex-col px-5 pt-12 pb-10 relative">
+    <main className="min-h-screen bg-white flex flex-col px-5 pt-12 pb-10 relative">
         {canExit && (
           <button
-            onClick={() => router.push('/dashboard')}
+            onClick={() => { window.location.href = '/dashboard' }}
             className="absolute top-6 right-5 p-2 rounded-full hover:bg-black/5 active:scale-95 transition-all text-[#8E8E93]"
             aria-label="Close"
           >
@@ -139,13 +111,12 @@ export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIPr
             </div>
           ))}
         </div>
-        <button onClick={handleSubscribe} disabled={loading}
-          className="w-full flex items-center justify-center gap-2 bg-[#6B0F1A] text-white rounded-2xl py-4 text-[17px] font-bold shadow-sm disabled:opacity-60 active:scale-[0.98] transition-transform">
+        <button onClick={handleSubscribe}
+          className="w-full flex items-center justify-center gap-2 bg-[#6B0F1A] text-white rounded-2xl py-4 text-[17px] font-bold shadow-sm active:scale-[0.98] transition-transform">
           <Zap className="w-4 h-4" />
-          {loading ? 'Opening payment…' : `Subscribe · ${plan.price}`}
+          {`Subscribe · ${plan.price}`}
         </button>
         <p className="text-center text-[12px] text-[#8E8E93] mt-3">Secure · Powered by Razorpay · Cancel anytime</p>
       </main>
-    </>
   )
 }
