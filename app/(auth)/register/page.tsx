@@ -164,9 +164,9 @@ export default function RegisterPage() {
 
         {/* Full Name */}
         <div className="bg-[#F5F5F5] rounded-2xl px-4 py-3.5">
-          <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-widest mb-1">Full Name</p>
+          <p className="text-[11px] font-bold text-[#C7C7CC] uppercase tracking-widest mb-1">Full Name</p>
           <input
-            placeholder="e.g. Fatima Shaikh"
+            placeholder="Your full name"
             autoComplete="name"
             {...register('name')}
             className="w-full text-[17px] text-[#1C1C1E] placeholder:text-[#C7C7CC] bg-transparent outline-none"
@@ -176,7 +176,7 @@ export default function RegisterPage() {
 
         {/* Mobile */}
         <div className="bg-[#F5F5F5] rounded-2xl px-4 py-3.5">
-          <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-widest mb-1">Mobile Number</p>
+          <p className="text-[11px] font-bold text-[#C7C7CC] uppercase tracking-widest mb-1">Mobile Number</p>
           <input
             type="tel"
             inputMode="numeric"
@@ -191,7 +191,7 @@ export default function RegisterPage() {
 
         {/* Address */}
         <div className="bg-[#F5F5F5] rounded-2xl px-4 py-3.5">
-          <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-widest mb-1">Address</p>
+          <p className="text-[11px] font-bold text-[#C7C7CC] uppercase tracking-widest mb-1">Address</p>
           <input
             placeholder="House / Shop / Street"
             autoComplete="street-address"
@@ -203,7 +203,7 @@ export default function RegisterPage() {
 
         {/* City */}
         <div className="bg-[#F5F5F5] rounded-2xl px-4 py-3.5">
-          <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-widest mb-1">City</p>
+          <p className="text-[11px] font-bold text-[#C7C7CC] uppercase tracking-widest mb-1">City</p>
           <input
             placeholder="e.g. Mumbai"
             autoComplete="address-level2"
@@ -215,7 +215,7 @@ export default function RegisterPage() {
 
         {/* Password */}
         <div className="bg-[#F5F5F5] rounded-2xl px-4 py-3.5">
-          <p className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-widest mb-1">Password</p>
+          <p className="text-[11px] font-bold text-[#C7C7CC] uppercase tracking-widest mb-1">Password</p>
           <div className="flex items-center gap-2">
             <input
               type={showPassword ? 'text' : 'password'}
