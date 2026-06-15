@@ -12,6 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Chérie — Booking made simple",
   description: "Booking platform for Heena artists and beauty parlors",
+  icons: { icon: "/favicon.png" },
 };
 
 export const viewport: Viewport = {
