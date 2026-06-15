@@ -55,7 +55,7 @@ export default function PlansUI({ subscriptionStatus, expiresInDays }: PlansUIPr
   }
 
   function handleSubscribe() {
-    window.location.href = plan.paymentLink
+    window.open(plan.paymentLink, '_blank', 'noopener,noreferrer')
   }
 
   const canExit = (subscriptionStatus === 'trial' || subscriptionStatus === 'active') && typeof expiresInDays === 'number' && expiresInDays > 0
