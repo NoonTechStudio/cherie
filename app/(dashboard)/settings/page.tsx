@@ -10,7 +10,7 @@ export default async function SettingsPage() {
   const [{ data: profile }, { data: business }] = await Promise.all([
     supabase
       .from('users')
-      .select('mobile, subscription_status, subscription_expires_at, trial_expires_at')
+      .select('mobile, name, address, city, subscription_status, subscription_expires_at, trial_expires_at')
       .eq('id', user.id)
       .single(),
     supabase
@@ -21,10 +21,7 @@ export default async function SettingsPage() {
   ])
 
   const isOnTrial = profile?.subscription_status === 'trial'
-  const expiryDateStr = isOnTrial
-    ? profile?.trial_expires_at
-    : profile?.subscription_expires_at
-
+  const expiryDateStr = isOnTrial ? profile?.trial_expires_at : profile?.subscription_expires_at
   const expiresInDays = expiryDateStr
     ? Math.ceil((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : null
@@ -32,12 +29,15 @@ export default async function SettingsPage() {
   return (
     <SettingsPanel
       mobile={profile?.mobile ?? null}
+      name={profile?.name ?? null}
+      address={profile?.address ?? null}
+      city={profile?.city ?? null}
       subscriptionStatus={profile?.subscription_status ?? null}
       subscriptionExpiresAt={expiryDateStr ?? null}
       expiresInDays={expiresInDays}
       businessName={business?.business_name ?? null}
       category={business?.category ?? null}
-      address={business?.address ?? null}
+      businessAddress={business?.address ?? null}
     />
   )
 }
