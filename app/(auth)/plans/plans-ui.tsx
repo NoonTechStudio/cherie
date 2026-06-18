@@ -20,14 +20,14 @@ const PLANS: Plan[] = [
     paymentLink: 'https://rzp.io/rzp/6E6mIZf',
   },
   {
-    id: '3mo', label: '3 Months', price: '₹222', perMonth: '₹74 / mo',
-    badge: '20% off', popular: true,
-    paymentLink: 'https://rzp.io/rzp/3rp9O1UB',
+    id: '3mo', label: '3 Months', price: '₹199', perMonth: '₹66 / mo',
+    badge: 'Save ₹38', popular: true,
+    paymentLink: 'https://rzp.io/rzp/ZXmxrna7',
   },
   {
-    id: '6mo', label: '6 Months', price: '₹444', perMonth: '₹74 / mo',
-    badge: '20% off',
-    paymentLink: 'https://rzp.io/rzp/ZmLODfx',
+    id: '6mo', label: '6 Months', price: '₹379', perMonth: '₹63 / mo',
+    badge: 'Best value — Save ₹95',
+    paymentLink: 'https://rzp.io/rzp/aMnOxzYj',
   },
 ]
 
