@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Clock, CalendarDays, TrendingUp, ChevronRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
+import { getUser, getBusinessProfile, getUserProfile } from '@/lib/supabase/queries'
 import { OnboardingTour } from '@/components/onboarding/tour'
 
 const AVATAR_COLORS = [
@@ -39,26 +40,21 @@ function getWeekBounds(): { start: string; end: string } {
 }
 
 export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getUser()
   if (!user) redirect('/login')
 
-  const { data: business } = await supabase
-    .from('business_profiles')
-    .select('id')
-    .eq('user_id', user.id)
-    .single()
-
+  const business = await getBusinessProfile(user.id)
   if (!business) redirect('/setup-business')
 
   const today = new Date().toISOString().split('T')[0]
   const { start: weekStart, end: weekEnd } = getWeekBounds()
 
+  const supabase = await createClient()
   const [
     { count: todayCount },
     { count: weekCount },
     { data: upcoming },
-    { data: userProfile },
+    userProfile,
   ] = await Promise.all([
     supabase
       .from('appointments')
@@ -78,11 +74,7 @@ export default async function DashboardPage() {
       .gte('start_date', today)
       .order('start_date', { ascending: true })
       .limit(5),
-    supabase
-      .from('users')
-      .select('subscription_status, subscription_expires_at, trial_expires_at')
-      .eq('id', user.id)
-      .single(),
+    getUserProfile(user.id),
   ])
 
   const isOnTrial = userProfile?.subscription_status === 'trial'

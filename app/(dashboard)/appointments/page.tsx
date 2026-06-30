@@ -1,21 +1,16 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { getUser, getBusinessProfile } from '@/lib/supabase/queries'
 import AppointmentsList from '@/components/appointments/appointments-list'
 
 export default async function AppointmentsPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser()
   if (!user) redirect('/login')
 
-  const { data: business } = await supabase
-    .from('business_profiles')
-    .select('id')
-    .eq('user_id', user.id)
-    .single()
+  const business = await getBusinessProfile(user.id)
   if (!business) redirect('/setup-business')
 
+  const supabase = await createClient()
   const { data: appointments } = await supabase
     .from('appointments')
     .select(

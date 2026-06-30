@@ -1,27 +1,16 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import { AppShell } from '@/components/layout/app-shell'
+import { getUser, getBusinessProfile } from '@/lib/supabase/queries'
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
+  const user = await getUser()
   if (!user) redirect('/login')
 
-  console.log('DASHBOARD LAYOUT: user.id =', user.id)
-
-  const { data: business, error: bizError } = await supabase
-    .from('business_profiles')
-    .select('business_name')
-    .eq('user_id', user.id)
-    .single()
-
-  console.log('DASHBOARD LAYOUT: business =', business, 'bizError =', bizError)
-
+  const business = await getBusinessProfile(user.id)
   if (!business) redirect('/setup-business')
 
   return (
