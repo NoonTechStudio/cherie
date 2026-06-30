@@ -11,7 +11,7 @@ export default async function PlansPage() {
   // Check subscription status
   const { data: profile } = await supabase
     .from('users')
-    .select('subscription_status, trial_expires_at, subscription_expires_at')
+    .select('subscription_status, trial_expires_at, subscription_expires_at, name, mobile')
     .eq('id', user.id)
     .single()
 
@@ -28,6 +28,8 @@ export default async function PlansPage() {
     <PlansUI
       subscriptionStatus={profile?.subscription_status ?? null}
       expiresInDays={expiresInDays}
+      userMobile={profile?.mobile ?? null}
+      userName={profile?.name ?? null}
     />
   )
 }
