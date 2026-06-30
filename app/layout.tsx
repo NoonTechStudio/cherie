@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { PWAProvider } from "@/components/pwa/pwa-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +19,16 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Chérie — Booking made simple",
   description: "Booking platform for Heena artists and beauty parlors",
-  icons: { icon: "/favicon.png" },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Chérie",
+  },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/icons/icon-152x152.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -37,6 +47,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-[#1C1C1E]">
         {children}
+        <PWAProvider />
         <Toaster position="bottom-center" />
       </body>
     </html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chérie – 7 Promotional Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cherry: #75070C;
+    --butter: #FFEDAB;
+    --butter-light: #FFF9E5;
+    --butter-faint: #FFF5CC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  h1.page-title {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    text-align: center;
+    opacity: 0.9;
+    margin-bottom: -20px;
+  }
+  p.page-sub {
+    color: #888;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: -20px;
+  }
+
+  /* Each card is 390×690 – Instagram story / portrait format */
+  .card-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-label {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .card {
+    width: 390px;
+    min-height: 690px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  /* ─── CARD 1 – Hero / Brand Intro ───────────────────────────── */
+  .card-1 {
+    background: var(--cherry);
+    padding: 52px 36px 44px;
+    justify-content: space-between;
+  }
+  .card-1 .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--butter);
+    font-weight: 900;
+  }
+  .card-1 .tagline-chip {
+    background: var(--butter);
+    color: var(--cherry);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+  .card-1 .center-block {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .card-1 .big-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    line-height: 1.15;
+    color: var(--butter);
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+  .card-1 .big-headline em {
+    font-style: italic;
+    color: #FFD770;
+  }
+  .card-1 .sub {
+    color: var(--butter);
+    opacity: 0.8;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .card-1 .bottom-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-1 .cta-pill {
+    background: var(--butter);
+    color: var(--cherry);
+    text-align: center;
+    padding: 18px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+  .card-1 .trial-note {
+    text-align: center;
+    color: var(--butter);
+    opacity: 0.6;
+    font-size: 12px;
+  }
+
+  /* ─── CARD 2 – Problem / Pain ────────────────────────────────── */
+  .card-2 {
+    background: var(--butter);
+    padding: 52px 36px 44px;
+    justify-content: space-between;
+  }
+  .card-2 .eyebrow {
+    text-align: center;
+    color: var(--cherry);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .card-2 .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--cherry);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 12px;
+  }
+  .card-2 .pain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .pain-item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(117,7,12,0.08);
+  }
+  .pain-item .emoji { font-size: 28px; flex-shrink: 0; }
+  .pain-item .text strong {
+    display: block;
+    color: var(--cherry);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .pain-item .text span {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .card-2 .solution-line {
+    background: var(--cherry);
+    color: var(--butter);
+    text-align: center;
+    border-radius: 16px;
+    padding: 16px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* ─── CARD 3 – Features ──────────────────────────────────────── */
+  .card-3 {
+    background: #fff;
+    padding: 52px 32px 44px;
+    justify-content: space-between;
+  }
+  .card-3 .header {
+    text-align: center;
+  }
+  .card-3 .header .brand-pill {
+    display: inline-block;
+    background: var(--cherry);
+    color: var(--butter);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  .card-3 .header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--cherry);
+    font-weight: 900;
+    line-height: 1.2;
+  }
+  .card-3 .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .feat-box {
+    background: var(--butter-light);
+    border-radius: 16px;
+    padding: 16px;
+    border-top: 3px solid var(--cherry);
+  }
+  .feat-box .icon { font-size: 26px; margin-bottom: 8px; }
+  .feat-box strong {
+    display: block;
+    color: var(--cherry);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .feat-box span {
+    color: #666;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .card-3 .bottom-cta {
+    background: var(--cherry);
+    color: var(--butter);
+    text-align: center;
+    padding: 18px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  /* ─── CARD 4 – Pricing ───────────────────────────────────────── */
+  .card-4 {
+    background: var(--cherry);
+    padding: 52px 32px 44px;
+    justify-content: space-between;
+  }
+  .card-4 .header { text-align: center; }
+  .card-4 .header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--butter);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .card-4 .header p {
+    color: var(--butter);
+    opacity: 0.7;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .plans-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .plan-row {
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,237,171,0.1);
+    border: 1px solid rgba(255,237,171,0.2);
+  }
+  .plan-row.featured {
+    background: #fff;
+    border: 2px solid var(--butter);
+    position: relative;
+  }
+  .plan-row .plan-left .plan-name {
+    color: var(--butter);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 3px;
+  }
+  .plan-row.featured .plan-left .plan-name { color: var(--cherry); }
+  .plan-row .plan-left .plan-price {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--butter);
+  }
+  .plan-row.featured .plan-left .plan-price { color: var(--cherry); }
+  .plan-row .plan-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .plan-row .badge {
+    background: var(--butter);
+    color: var(--cherry);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .plan-row.featured .badge {
+    background: var(--cherry);
+    color: var(--butter);
+  }
+  .plan-row .per-month {
+    color: var(--butter);
+    font-size: 12px;
+    opacity: 0.6;
+  }
+  .plan-row.featured .per-month { color: var(--cherry); }
+  .card-4 .trial-box {
+    background: rgba(255,237,171,0.12);
+    border: 1px dashed rgba(255,237,171,0.4);
+    border-radius: 16px;
+    padding: 14px 20px;
+    text-align: center;
+    color: var(--butter);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .card-4 .trial-box strong { font-weight: 700; display: block; font-size: 15px; margin-bottom: 3px; }
+  .card-4 .bottom-cta {
+    background: var(--butter);
+    color: var(--cherry);
+    text-align: center;
+    padding: 18px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 15px;
+  }
+
+  /* ─── CARD 5 – How It Works ──────────────────────────────────── */
+  .card-5 {
+    background: var(--butter);
+    padding: 52px 36px 44px;
+    justify-content: space-between;
+  }
+  .card-5 .eyebrow {
+    text-align: center;
+    color: var(--cherry);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .card-5 .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--cherry);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 10px;
+  }
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+  }
+  .step-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .step-item:last-child { padding-bottom: 0; }
+  .step-item .step-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--cherry);
+    color: var(--butter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--cherry);
+    opacity: 0.25;
+    margin-top: 6px;
+    min-height: 30px;
+  }
+  .step-item .step-text {
+    padding-top: 8px;
+  }
+  .step-item .step-text strong {
+    display: block;
+    color: var(--cherry);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .step-item .step-text span {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .card-5 .cta-pill {
+    background: var(--cherry);
+    color: var(--butter);
+    text-align: center;
+    padding: 18px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+  /* ─── CARD 6 – Social Proof / Reminder ──────────────────────── */
+  .card-6 {
+    background: #fff;
+    padding: 52px 36px 44px;
+    justify-content: space-between;
+  }
+  .card-6 .top {
+    text-align: center;
+  }
+  .card-6 .top .icon-big { font-size: 64px; margin-bottom: 16px; }
+  .card-6 .top h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: var(--cherry);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .card-6 .top p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .card-6 .stats-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .stat-box {
+    flex: 1;
+    background: var(--butter-light);
+    border-radius: 16px;
+    padding: 20px 12px;
+    text-align: center;
+    border-bottom: 3px solid var(--cherry);
+  }
+  .stat-box .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--cherry);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .stat-box .label {
+    font-size: 11px;
+    color: #777;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .card-6 .quote-block {
+    background: var(--butter);
+    border-radius: 20px;
+    padding: 22px 22px;
+    position: relative;
+  }
+  .card-6 .quote-block .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    color: var(--cherry);
+    opacity: 0.2;
+    line-height: 1;
+    position: absolute;
+    top: 10px;
+    left: 18px;
+  }
+  .card-6 .quote-block p {
+    color: var(--cherry);
+    font-size: 14px;
+    line-height: 1.65;
+    font-weight: 500;
+    padding-left: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .card-6 .quote-block .author {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cherry);
+    opacity: 0.6;
+    padding-left: 20px;
+  }
+  .card-6 .cta-pill {
+    background: var(--cherry);
+    color: var(--butter);
+    text-align: center;
+    padding: 18px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 15px;
+  }
+
+  /* ─── CARD 7 – Final CTA / Urgency ──────────────────────────── */
+  .card-7 {
+    background: var(--cherry);
+    padding: 52px 36px 44px;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  /* decorative circles */
+  .card-7::before {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(255,237,171,0.05);
+    top: -80px;
+    right: -80px;
+  }
+  .card-7::after {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255,237,171,0.05);
+    bottom: -60px;
+    left: -60px;
+  }
+  .card-7 .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  .card-7 .center-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .card-7 .center-content .sparkle { font-size: 52px; margin-bottom: 16px; }
+  .card-7 .center-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: var(--butter);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .card-7 .center-content h2 em {
+    font-style: italic;
+    color: #FFD770;
+  }
+  .card-7 .center-content p {
+    color: var(--butter);
+    opacity: 0.8;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .card-7 .perks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .perk-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,237,171,0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+  .perk-row .tick {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--butter);
+    color: var(--cherry);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .perk-row span {
+    color: var(--butter);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .card-7 .bottom-block {
+    position: relative;
+    z-index: 1;
+  }
+  .card-7 .cta-pill {
+    background: var(--butter);
+    color: var(--cherry);
+    text-align: center;
+    padding: 20px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .card-7 .wa-line {
+    text-align: center;
+    color: var(--butter);
+    opacity: 0.55;
+    font-size: 12px;
+  }
+
+  @media (max-width: 430px) {
+    .card { width: 100%; min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Chérie — Promotional Cards</h1>
+<p class="page-sub">7 Mobile-First Cards · Instagram / WhatsApp Stories</p>
+
+<!-- ══════════════════════════════════════════
+     CARD 1 – Brand Hero
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 1 — Brand Intro</div>
+  <div class="card card-1">
+    <div class="top-bar">
+      <span class="brand-name">Chérie</span>
+      <span class="tagline-chip">For Heena Artists & Parlors</span>
+    </div>
+    <div class="center-block">
+      <div class="big-headline">Your bookings,<br/><em>beautifully</em><br/>organised.</div>
+      <div class="sub">The simplest appointment app built<br/>for Heena artists and beauty parlors in India.<br/>Set up in under 2 minutes.</div>
+    </div>
+    <div class="bottom-block">
+      <div class="cta-pill">✨ Start Your Free Trial</div>
+      <div class="trial-note">3 days free · No card required · Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 2 – Pain Points
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 2 — Pain Points</div>
+  <div class="card card-2">
+    <div>
+      <div class="eyebrow">Sound familiar?</div>
+      <div class="headline">Still managing<br/>bookings on<br/>WhatsApp?</div>
+    </div>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="emoji">🗓</div>
+        <div class="text">
+          <strong>Double bookings happen</strong>
+          <span>Two clients, same slot. Awkward cancellations. Lost trust.</span>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="emoji">📱</div>
+        <div class="text">
+          <strong>Clients forget appointments</strong>
+          <span>No reminder means no-show. Your time, wasted.</span>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="emoji">📒</div>
+        <div class="text">
+          <strong>Client list is scattered</strong>
+          <span>Phone contacts, chat history, paper registers — no real record.</span>
+        </div>
+      </div>
+    </div>
+    <div class="solution-line">
+      💡 Chérie fixes all of this — in 2 minutes flat.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 3 – Features
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 3 — Features</div>
+  <div class="card card-3">
+    <div class="header">
+      <span class="brand-pill">Chérie</span>
+      <h2>Everything you need.<br/>Nothing you don't.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-box">
+        <div class="icon">📅</div>
+        <strong>Appointment Booking</strong>
+        <span>Accept bookings 24/7. Clients pick their own slot.</span>
+      </div>
+      <div class="feat-box">
+        <div class="icon">👥</div>
+        <strong>Client Management</strong>
+        <span>Every client's history & preferences — all in one place.</span>
+      </div>
+      <div class="feat-box">
+        <div class="icon">🔔</div>
+        <strong>SMS & WhatsApp</strong>
+        <span>Auto reminders before every appointment. Zero no-shows.</span>
+      </div>
+      <div class="feat-box">
+        <div class="icon">📊</div>
+        <strong>Today's Overview</strong>
+        <span>See today's bookings the moment you open the app.</span>
+      </div>
+      <div class="feat-box">
+        <div class="icon">📱</div>
+        <strong>Mobile First</strong>
+        <span>No app download. Works right in your browser.</span>
+      </div>
+      <div class="feat-box">
+        <div class="icon">🔒</div>
+        <strong>Secure & Private</strong>
+        <span>OTP login. Your data belongs to you, always.</span>
+      </div>
+    </div>
+    <div class="bottom-cta">Try Free for 3 Days →</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 4 – Pricing
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 4 — Pricing</div>
+  <div class="card card-4">
+    <div class="header">
+      <h2>Simple pricing.<br/>No surprises.</h2>
+      <p>Start free for 3 days. No card during trial.<br/>Pick what works for you.</p>
+    </div>
+    <div class="plans-stack">
+      <div class="plan-row">
+        <div class="plan-left">
+          <div class="plan-name">1 Month</div>
+          <div class="plan-price">₹79</div>
+        </div>
+        <div class="plan-right">
+          <span class="per-month">₹79 / month</span>
+        </div>
+      </div>
+      <div class="plan-row featured">
+        <div class="plan-left">
+          <div class="plan-name">3 Months</div>
+          <div class="plan-price">₹199</div>
+        </div>
+        <div class="plan-right">
+          <span class="badge">⭐ Save ₹38</span>
+          <span class="per-month">₹66 / month</span>
+        </div>
+      </div>
+      <div class="plan-row">
+        <div class="plan-left">
+          <div class="plan-name">6 Months</div>
+          <div class="plan-price">₹379</div>
+        </div>
+        <div class="plan-right">
+          <span class="badge">Best Value — Save ₹95</span>
+          <span class="per-month">₹63 / month</span>
+        </div>
+      </div>
+    </div>
+    <div class="trial-box">
+      <strong>🎁 3-Day Free Trial</strong>
+      No credit card · No risk · Cancel anytime<br/>Payments secured by 🔒 Razorpay
+    </div>
+    <div class="bottom-cta">Start Free — No Card Needed</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 5 – How It Works
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 5 — How It Works</div>
+  <div class="card card-5">
+    <div>
+      <div class="eyebrow">Getting started</div>
+      <div class="headline">Up and running<br/>in 3 steps.</div>
+    </div>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-col">
+          <div class="step-num">1</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-text">
+          <strong>Create your account</strong>
+          <span>Enter your name, mobile number, and city. Done in under 2 minutes.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-col">
+          <div class="step-num">2</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-text">
+          <strong>Set up your business</strong>
+          <span>Add your business name and choose your type — Heena artist or beauty parlor. Your profile is ready instantly.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-col">
+          <div class="step-num">3</div>
+        </div>
+        <div class="step-text">
+          <strong>Start taking bookings</strong>
+          <span>Share your booking link with clients. They book, you get notified. That's it.</span>
+        </div>
+      </div>
+    </div>
+    <div class="cta-pill">Get Started — It's Free 🌸</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 6 – Trust / Social Proof
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 6 — Trust & Social Proof</div>
+  <div class="card card-6">
+    <div class="top">
+      <div class="icon-big">🌸</div>
+      <h2>Trusted by<br/>Heena artists<br/>across India.</h2>
+      <p>Built specifically for your business — not a generic booking tool, but a tool that speaks your language.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="num">2 min</span>
+        <span class="label">Setup time</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">0</span>
+        <span class="label">App downloads needed</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">24/7</span>
+        <span class="label">Bookings accepted</span>
+      </div>
+    </div>
+    <div class="quote-block">
+      <div class="quote-mark">"</div>
+      <p>No more losing clients because I forgot to reply. Chérie handles everything. My clients love being able to book anytime."</p>
+      <span class="author">— Heena Artist, Jaipur</span>
+    </div>
+    <div class="cta-pill">Join them — Try Free Today →</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CARD 7 – Final CTA / Urgency
+══════════════════════════════════════════ -->
+<div class="card-wrap">
+  <div class="card-label">Card 7 — Final CTA</div>
+  <div class="card card-7">
+    <div class="top-row">
+      <span class="brand-name">Chérie</span>
+      <span style="color: var(--butter); font-size: 11px; opacity: 0.6; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">By Meridian Grid</span>
+    </div>
+    <div class="center-content">
+      <div class="sparkle">✨</div>
+      <h2>Your next client<br/>is waiting.<br/>Let's get you <em>ready.</em></h2>
+      <p>Join Heena artists and beauty parlors already running their bookings professionally with Chérie.</p>
+    </div>
+    <div class="perks">
+      <div class="perk-row">
+        <div class="tick">✓</div>
+        <span>3-day free trial — no credit card needed</span>
+      </div>
+      <div class="perk-row">
+        <div class="tick">✓</div>
+        <span>Set up in under 2 minutes, from your phone</span>
+      </div>
+      <div class="perk-row">
+        <div class="tick">✓</div>
+        <span>Auto WhatsApp & SMS reminders for clients</span>
+      </div>
+      <div class="perk-row">
+        <div class="tick">✓</div>
+        <span>Plans from just ₹79/month</span>
+      </div>
+    </div>
+    <div class="bottom-block">
+      <div class="cta-pill">Start Free — No Card Needed 🌸</div>
+      <div class="wa-line">Need help? WhatsApp us at +91 80004 03090</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
