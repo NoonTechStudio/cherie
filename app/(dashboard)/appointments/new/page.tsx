@@ -6,11 +6,12 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { ChevronLeft, AlertCircle, ChevronDown } from 'lucide-react'
+import { ChevronLeft, AlertCircle, ChevronDown, Clock } from 'lucide-react'
 import { toast } from 'sonner'
 import { createClient } from '@/lib/supabase/client'
 import { SERVICE_TYPES } from '@/lib/constants'
 import { checkDateConflict } from '@/lib/appointments/checkConflict'
+import { TimePicker } from '@/components/appointments/time-picker'
 
 const schema = z
   .object({
@@ -20,6 +21,7 @@ const schema = z
     booking_type: z.enum(['single_day', 'date_range']),
     start_date: z.string().min(1, 'Start date is required'),
     end_date: z.string().optional(),
+    start_time: z.string().min(1, 'Time is required'),
     service_type: z.string().min(1, 'Service type is required'),
   })
   .refine(
@@ -72,11 +74,13 @@ export default function NewAppointmentPage() {
   const [saving, setSaving] = useState(false)
   const [conflicts, setConflicts] = useState<ConflictRow[]>([])
   const [pendingData, setPendingData] = useState<FormData | null>(null)
+  const [timePickerOpen, setTimePickerOpen] = useState(false)
 
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -85,10 +89,21 @@ export default function NewAppointmentPage() {
       client_name: prefillName,
       client_mobile: prefillMobile,
       client_address: prefillAddress,
+      start_time: '',
     },
   })
 
   const bookingType = watch('booking_type')
+  const startTime = watch('start_time')
+
+  function formatTimeDisplay(val: string) {
+    if (!val) return null
+    const [hStr, mStr] = val.split(':')
+    const h = parseInt(hStr, 10)
+    const period = h >= 12 ? 'PM' : 'AM'
+    const h12 = h % 12 === 0 ? 12 : h % 12
+    return `${h12}:${mStr} ${period}`
+  }
 
   useEffect(() => {
     async function loadBusiness() {
@@ -121,6 +136,7 @@ export default function NewAppointmentPage() {
         booking_type: data.booking_type,
         start_date: data.start_date,
         end_date: data.booking_type === 'date_range' ? (data.end_date ?? null) : null,
+        start_time: data.start_time || null,
         service_type: data.service_type,
         status: 'confirmed',
       })
@@ -264,6 +280,29 @@ export default function NewAppointmentPage() {
               />
             </Field>
           )}
+
+          <Field label="Time" error={errors.start_time?.message}>
+            <button
+              type="button"
+              onClick={() => setTimePickerOpen((o) => !o)}
+              className="w-full flex items-center justify-between text-left"
+            >
+              <span className={startTime ? 'text-[16px] text-[#1C1C1E]' : 'text-[16px] text-[#C7C7CC]'}>
+                {startTime ? formatTimeDisplay(startTime) : 'Select time'}
+              </span>
+              <Clock className="w-4 h-4 text-[#C7C7CC]" />
+            </button>
+            {timePickerOpen && (
+              <div className="mt-3">
+                <TimePicker
+                  value={startTime}
+                  onChange={(val) => {
+                    setValue('start_time', val, { shouldValidate: true })
+                  }}
+                />
+              </div>
+            )}
+          </Field>
 
           <Field label="Service Type" error={errors.service_type?.message} last>
             <div className="relative">

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { CalendarDays, X, CheckCircle2, XCircle, Phone, MapPin, Scissors, CalendarRange } from 'lucide-react'
+import { CalendarDays, X, CheckCircle2, XCircle, Phone, MapPin, Scissors, CalendarRange, Clock } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
@@ -24,7 +24,17 @@ export type Appointment = {
   booking_type: string
   start_date: string
   end_date: string | null
+  start_time: string | null
   status: string
+}
+
+function formatTime(val: string | null | undefined) {
+  if (!val) return null
+  const [hStr, mStr] = val.split(':')
+  const h = parseInt(hStr, 10)
+  const period = h >= 12 ? 'PM' : 'AM'
+  const h12 = h % 12 === 0 ? 12 : h % 12
+  return `${h12}:${mStr} ${period}`
 }
 
 const AVATAR_COLORS = [
@@ -163,6 +173,9 @@ export default function AppointmentsList({ appointments }: { appointments: Appoi
                 </div>
                 <div className="flex flex-col items-end gap-1.5 shrink-0">
                   <p className="text-[12px] text-[#8E8E93] font-medium">{formatDate(apt.start_date)}</p>
+                  {apt.start_time && (
+                    <p className="text-[11px] text-[#AEAEB2] font-medium">{formatTime(apt.start_time)}</p>
+                  )}
                   <StatusBadge status={apt.status} />
                 </div>
               </button>
@@ -220,6 +233,15 @@ export default function AppointmentsList({ appointments }: { appointments: Appoi
                     <p className="text-[14px] text-[#1C1C1E] font-medium">{selected.service_type}</p>
                   </div>
                 </div>
+                {selected.start_time && (
+                  <div className="flex items-center gap-3 px-4 py-3 border-b border-[#E5E5EA]">
+                    <Clock className="w-4 h-4 text-[#8E8E93] shrink-0" />
+                    <div>
+                      <p className="text-[11px] text-[#8E8E93]">Time</p>
+                      <p className="text-[14px] text-[#1C1C1E] font-medium">{formatTime(selected.start_time)}</p>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center gap-3 px-4 py-3">
                   <CalendarRange className="w-4 h-4 text-[#8E8E93] shrink-0" />
                   <div>
