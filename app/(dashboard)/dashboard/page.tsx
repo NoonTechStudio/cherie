@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { Clock, CalendarDays, TrendingUp, ChevronRight } from 'lucide-react'
+import { Clock, CalendarDays, TrendingUp, ChevronRight, Sparkles } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { getUser, getBusinessProfile, getUserProfile } from '@/lib/supabase/queries'
 import { OnboardingTour } from '@/components/onboarding/tour'
@@ -53,6 +53,7 @@ export default async function DashboardPage() {
   const [
     { count: todayCount },
     { count: weekCount },
+    { data: todayAppointments },
     { data: upcoming },
     userProfile,
   ] = await Promise.all([
@@ -67,6 +68,13 @@ export default async function DashboardPage() {
       .eq('business_id', business.id)
       .gte('start_date', weekStart)
       .lte('start_date', weekEnd),
+    supabase
+      .from('appointments')
+      .select('client_name, service_type, start_time')
+      .eq('business_id', business.id)
+      .eq('start_date', today)
+      .eq('status', 'confirmed')
+      .order('start_time', { ascending: true }),
     supabase
       .from('appointments')
       .select('id, client_name, service_type, start_date')
@@ -87,9 +95,59 @@ export default async function DashboardPage() {
     ? Math.ceil((expiryDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : null
 
+  const confirmedToday = todayAppointments ?? []
+
+  function formatTime(val: string | null) {
+    if (!val) return null
+    const [hStr, mStr] = val.split(':')
+    const h = parseInt(hStr, 10)
+    const period = h >= 12 ? 'PM' : 'AM'
+    const h12 = h % 12 === 0 ? 12 : h % 12
+    return `${h12}:${mStr} ${period}`
+  }
+
   return (
     <div className="space-y-5">
       <OnboardingTour />
+
+      {/* Today's appointment highlight banner */}
+      {confirmedToday.length > 0 && (
+        <div className="bg-[#6B0F1A] rounded-2xl p-4 shadow-lg shadow-[#6B0F1A]/20">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles className="w-4 h-4 text-white/80" />
+            <p className="text-[12px] font-semibold text-white/80 uppercase tracking-wide">Today's Schedule</p>
+          </div>
+          <p className="text-[22px] font-bold text-white leading-tight mb-3">
+            {confirmedToday.length === 1
+              ? 'You have 1 appointment today'
+              : `You have ${confirmedToday.length} appointments today`}
+          </p>
+          <div className="space-y-2">
+            {confirmedToday.slice(0, 3).map((apt, i) => (
+              <div key={i} className="flex items-center gap-2.5 bg-white/10 rounded-xl px-3 py-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
+                <p className="text-[13px] font-semibold text-white truncate flex-1">{apt.client_name}</p>
+                <p className="text-[12px] text-white/60 shrink-0">{apt.service_type}</p>
+                {apt.start_time && (
+                  <p className="text-[12px] font-semibold text-white/80 shrink-0">{formatTime(apt.start_time)}</p>
+                )}
+              </div>
+            ))}
+            {confirmedToday.length > 3 && (
+              <p className="text-[12px] text-white/60 text-center pt-1">
+                +{confirmedToday.length - 3} more
+              </p>
+            )}
+          </div>
+          <Link
+            href="/appointments"
+            className="mt-3 flex items-center justify-center gap-1 bg-white/15 rounded-xl py-2.5 text-[13px] font-semibold text-white"
+          >
+            View all bookings <ChevronRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      )}
+
       {/* Trial / renewal banner */}
       {isOnTrial && expiresInDays !== null && (
         <div className="bg-[#FFF8E7] border border-amber-200/80 rounded-2xl p-4 flex items-center gap-3">

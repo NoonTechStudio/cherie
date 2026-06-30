@@ -35,7 +35,7 @@ const PLANS: Plan[] = [
 const FEATURES = [
   'Unlimited appointment bookings',
   'Full client management',
-  'SMS & WhatsApp reminders',
+  'Today\'s schedule highlight on dashboard',
   'Business profile page',
 ]
 
