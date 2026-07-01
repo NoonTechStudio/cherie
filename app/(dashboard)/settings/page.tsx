@@ -16,7 +16,7 @@ export default async function SettingsPage() {
   const isOnTrial = profile?.subscription_status === 'trial'
   const expiryDateStr = isOnTrial ? profile?.trial_expires_at : profile?.subscription_expires_at
   const expiresInDays = expiryDateStr
-    ? Math.ceil((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    ? Math.floor((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : null
 
   return (

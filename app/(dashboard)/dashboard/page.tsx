@@ -92,7 +92,7 @@ export default async function DashboardPage() {
     : (userProfile?.subscription_expires_at ? new Date(userProfile.subscription_expires_at) : null)
 
   const expiresInDays = expiryDate
-    ? Math.ceil((expiryDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    ? Math.floor((expiryDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : null
 
   const confirmedToday = todayAppointments ?? []

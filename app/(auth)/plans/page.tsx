@@ -21,7 +21,7 @@ export default async function PlansPage() {
     : profile?.subscription_expires_at
 
   const expiresInDays = expiryDateStr
-    ? Math.ceil((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    ? Math.floor((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : null
 
   return (
