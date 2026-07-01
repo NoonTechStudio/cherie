@@ -29,7 +29,7 @@ const PLANS = [
 const TRIAL_FEATURES = [
   'Unlimited appointment bookings',
   'Client management & history',
-  'SMS & WhatsApp reminders',
+  'Today\'s schedule dashboard',
 ]
 
 export default function RegisterPage() {
