@@ -1,7 +1,11 @@
 /**
- * Calculate days remaining using calendar days only (midnight to midnight).
- * Registered at 7 PM today still shows "3 days left" until midnight.
- * After midnight the count drops by 1 — no hourly drift.
+ * Calendar-day difference between today's midnight and the expiry midnight.
+ *
+ * Register Jul 1 → expiry stored as Jul 4 00:00:00
+ *   Jul 1 → 3   ("3 days left")
+ *   Jul 2 → 2   ("2 days left")
+ *   Jul 3 → 1   ("expiring tonight")
+ *   Jul 4 → 0   (BLOCKED)
  */
 export function daysRemaining(expiryDateStr: string): number {
   const now = new Date()
@@ -14,13 +18,12 @@ export function daysRemaining(expiryDateStr: string): number {
 }
 
 /**
- * Returns trial_expires_at for a new user: 23:59:59 on the 3rd calendar
- * day from today (inclusive of today as day 1).
- * Register on Jul 1 → expires Jul 3 at 23:59:59 → blocked from Jul 4.
+ * Sets trial_expires_at to midnight that starts the 4th day (= end of 3rd day).
+ * Register Jul 1 → Jul 4 00:00:00 → user is blocked when they open on Jul 4.
  */
 export function trialExpiryDate(): string {
   const d = new Date()
-  d.setDate(d.getDate() + 2)   // +2 because today itself is day 1
-  d.setHours(23, 59, 59, 999)
+  d.setDate(d.getDate() + 3)  // 3 full days ahead
+  d.setHours(0, 0, 0, 0)      // midnight — start of that day
   return d.toISOString()
 }

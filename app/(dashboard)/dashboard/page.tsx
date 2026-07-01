@@ -146,34 +146,38 @@ export default async function DashboardPage() {
 
       {/* Trial / renewal banner */}
       {isOnTrial && expiresInDays !== null && (
-        <div className="bg-[#FFF8E7] border border-amber-200/80 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-            <Clock className="w-4 h-4 text-amber-600" />
+        <div className={`border rounded-2xl p-4 flex items-center gap-3 ${expiresInDays === 1 ? 'bg-red-50 border-red-200' : 'bg-[#FFF8E7] border-amber-200/80'}`}>
+          <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${expiresInDays === 1 ? 'bg-red-100' : 'bg-amber-100'}`}>
+            <Clock className={`w-4 h-4 ${expiresInDays === 1 ? 'text-red-600' : 'text-amber-600'}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-semibold text-amber-900">
-              {expiresInDays <= 0 ? 'Free trial ended' : `${expiresInDays} day${expiresInDays === 1 ? '' : 's'} of free trial left`}
+            <p className={`text-[13px] font-semibold ${expiresInDays === 1 ? 'text-red-900' : 'text-amber-900'}`}>
+              {expiresInDays === 1
+                ? 'Your free trial expires tonight at midnight'
+                : `${expiresInDays} days of free trial left`}
             </p>
-            <p className="text-[12px] text-amber-700 mt-0.5">Subscribe to keep your bookings</p>
+            <p className={`text-[12px] mt-0.5 ${expiresInDays === 1 ? 'text-red-700' : 'text-amber-700'}`}>Subscribe to keep your bookings</p>
           </div>
-          <Link href="/plans" className="text-[13px] font-semibold text-amber-800 bg-amber-100 px-3 py-1.5 rounded-lg shrink-0">
+          <Link href="/plans" className={`text-[13px] font-semibold px-3 py-1.5 rounded-lg shrink-0 ${expiresInDays === 1 ? 'text-red-800 bg-red-100' : 'text-amber-800 bg-amber-100'}`}>
             View Plans
           </Link>
         </div>
       )}
 
       {!isOnTrial && expiresInDays !== null && expiresInDays <= 7 && (
-        <div className="bg-amber-50 border border-amber-200/80 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-            <Clock className="w-4 h-4 text-amber-600" />
+        <div className={`border rounded-2xl p-4 flex items-center gap-3 ${expiresInDays === 1 ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200/80'}`}>
+          <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${expiresInDays === 1 ? 'bg-red-100' : 'bg-amber-100'}`}>
+            <Clock className={`w-4 h-4 ${expiresInDays === 1 ? 'text-red-600' : 'text-amber-600'}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-semibold text-amber-900">
-              {expiresInDays <= 0 ? 'Subscription expired' : `${expiresInDays} day${expiresInDays === 1 ? '' : 's'} left`}
+            <p className={`text-[13px] font-semibold ${expiresInDays === 1 ? 'text-red-900' : 'text-amber-900'}`}>
+              {expiresInDays === 1
+                ? 'Subscription expires tonight at midnight'
+                : `${expiresInDays} days left on subscription`}
             </p>
-            <p className="text-[12px] text-amber-700 mt-0.5">Renew to continue using Chérie</p>
+            <p className={`text-[12px] mt-0.5 ${expiresInDays === 1 ? 'text-red-700' : 'text-amber-700'}`}>Renew to continue using Chérie</p>
           </div>
-          <Link href="/plans" className="text-[13px] font-semibold text-amber-800 bg-amber-100 px-3 py-1.5 rounded-lg shrink-0">
+          <Link href="/plans" className={`text-[13px] font-semibold px-3 py-1.5 rounded-lg shrink-0 ${expiresInDays === 1 ? 'text-red-800 bg-red-100' : 'text-amber-800 bg-amber-100'}`}>
             Renew
           </Link>
         </div>

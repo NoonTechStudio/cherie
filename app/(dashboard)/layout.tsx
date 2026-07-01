@@ -20,10 +20,10 @@ export default async function DashboardLayout({
 
   if (status === 'trial') {
     const days = profile?.trial_expires_at ? daysRemaining(profile.trial_expires_at) : null
-    if (days === null || days < 0) redirect('/plans')
+    if (days === null || days <= 0) redirect('/plans')
   } else if (status === 'active') {
     const days = profile?.subscription_expires_at ? daysRemaining(profile.subscription_expires_at) : null
-    if (days === null || days < 0) redirect('/plans')
+    if (days === null || days <= 0) redirect('/plans')
   } else {
     redirect('/plans')
   }
