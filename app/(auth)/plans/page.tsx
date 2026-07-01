@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import PlansUI from './plans-ui'
+import { daysRemaining } from '@/lib/trial'
 
 export default async function PlansPage() {
   const supabase = await createClient()
@@ -16,13 +17,8 @@ export default async function PlansPage() {
     .single()
 
   const isOnTrial = profile?.subscription_status === 'trial'
-  const expiryDateStr = isOnTrial
-    ? profile?.trial_expires_at
-    : profile?.subscription_expires_at
-
-  const expiresInDays = expiryDateStr
-    ? Math.floor((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-    : null
+  const expiryDateStr = isOnTrial ? profile?.trial_expires_at : profile?.subscription_expires_at
+  const expiresInDays = expiryDateStr ? daysRemaining(expiryDateStr) : null
 
   return (
     <PlansUI

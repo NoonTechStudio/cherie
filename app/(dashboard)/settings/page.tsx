@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getUser, getBusinessProfile, getUserProfile } from '@/lib/supabase/queries'
+import { daysRemaining } from '@/lib/trial'
 import { SettingsPanel } from '@/components/settings/settings-panel'
 
 export default async function SettingsPage() {
@@ -15,9 +16,7 @@ export default async function SettingsPage() {
 
   const isOnTrial = profile?.subscription_status === 'trial'
   const expiryDateStr = isOnTrial ? profile?.trial_expires_at : profile?.subscription_expires_at
-  const expiresInDays = expiryDateStr
-    ? Math.floor((new Date(expiryDateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-    : null
+  const expiresInDays = expiryDateStr ? daysRemaining(expiryDateStr) : null
 
   return (
     <SettingsPanel

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { Clock, CalendarDays, TrendingUp, ChevronRight, Sparkles } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { getUser, getBusinessProfile, getUserProfile } from '@/lib/supabase/queries'
+import { daysRemaining } from '@/lib/trial'
 import { OnboardingTour } from '@/components/onboarding/tour'
 
 const AVATAR_COLORS = [
@@ -87,13 +88,8 @@ export default async function DashboardPage() {
 
   const isOnTrial = userProfile?.subscription_status === 'trial'
 
-  const expiryDate = isOnTrial
-    ? (userProfile?.trial_expires_at ? new Date(userProfile.trial_expires_at) : null)
-    : (userProfile?.subscription_expires_at ? new Date(userProfile.subscription_expires_at) : null)
-
-  const expiresInDays = expiryDate
-    ? Math.floor((expiryDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-    : null
+  const expiryDateStr = isOnTrial ? userProfile?.trial_expires_at : userProfile?.subscription_expires_at
+  const expiresInDays = expiryDateStr ? daysRemaining(expiryDateStr) : null
 
   const confirmedToday = todayAppointments ?? []
 

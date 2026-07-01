@@ -9,6 +9,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Eye, EyeOff, Check, Sparkles, ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { trialExpiryDate } from '@/lib/trial'
 
 const schema = z.object({
   name: z.string().min(2, 'Enter your full name'),
@@ -63,7 +64,7 @@ export default function RegisterPage() {
       return
     }
 
-    const trialExpiresAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
+    const trialExpiresAt = trialExpiryDate()
     const { error: profileError } = await supabase.from('users').upsert({
       id: authData.user!.id,
       mobile: data.mobile,
